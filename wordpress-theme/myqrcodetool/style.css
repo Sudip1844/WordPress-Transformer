@@ -1,0 +1,16 @@
+/*
+Theme Name: My QRcode Tool
+Theme URI: https://myqrcodetool.com/
+Author: My Qrcode Tool
+Author URI: https://myqrcodetool.com/
+Description: A professional QR Code Generator WordPress theme with support for multiple QR code types including URL, Text, WiFi, WhatsApp, vCard, Email, SMS, Phone, Event, Image, PayPal, Zoom, and more. Features custom logo support, multiple export formats, and SEO-optimized pages.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: myqrcodetool
+Tags: qr-code, generator, utility, responsive, custom-logo, seo-ready
+
+This theme converts a static QR Code Generator website to WordPress.
+*/
+
+@import url('assets/css/main.css');
