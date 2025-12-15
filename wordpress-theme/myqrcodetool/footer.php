@@ -1,34 +1,83 @@
     </div><!-- #root -->
     
-    <!-- Dynamic Random QR Links Section - Popular QR Code Types -->
-    <?php if (get_theme_mod('show_random_qr_links', true)) : ?>
-    <div style="padding: 2rem 1rem; background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%); color: white;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 1rem; text-align: center;">
-                Popular QR Code Types
-            </h2>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;">
-                <?php
-                $link_count = get_theme_mod('random_qr_links_count', 4);
-                $random_pages = myqrcodetool_get_random_qr_pages($link_count);
-                foreach ($random_pages as $slug => $title) :
-                ?>
-                <a href="<?php echo esc_url(home_url('/' . $slug . '/')); ?>" 
-                   style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 9999px; color: white; text-decoration: none; font-size: 0.875rem; transition: background 0.2s;"
-                   onmouseover="this.style.background='rgba(255,255,255,0.3)'" 
-                   onmouseout="this.style.background='rgba(255,255,255,0.2)'">
-                    <?php echo esc_html($title); ?>
-                </a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </div>
-    <?php endif; ?>
-    
-    <!-- Footer Credits -->
-    <footer style="padding: 1.5rem 1rem; background: #1f2937; color: #9ca3af; text-align: center; font-size: 0.875rem;">
-        <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. Free QR Code Generator - No Registration Required.</p>
-    </footer>
+    <script>
+    // Dynamic QR Links - Replace hardcoded footer links with random ones
+    document.addEventListener('DOMContentLoaded', function() {
+        // All 13 QR generator pages (no scanner)
+        const allQRPages = [
+            { slug: 'url-to-qr', title: 'URL QR Code', icon: 'link' },
+            { slug: 'text-to-qr', title: 'Text QR Code', icon: 'file-text' },
+            { slug: 'wifi-to-qr', title: 'WiFi QR Code', icon: 'wifi' },
+            { slug: 'whatsapp-to-qr', title: 'WhatsApp QR Code', icon: 'message-circle' },
+            { slug: 'email-to-qr', title: 'Email QR Code', icon: 'mail' },
+            { slug: 'phone-to-qr', title: 'Phone QR Code', icon: 'phone' },
+            { slug: 'sms-to-qr', title: 'SMS QR Code', icon: 'message-square' },
+            { slug: 'contact-to-qr', title: 'Contact QR Code', icon: 'user' },
+            { slug: 'v-card-to-qr', title: 'vCard QR Code', icon: 'credit-card' },
+            { slug: 'event-to-qr', title: 'Event QR Code', icon: 'calendar' },
+            { slug: 'image-to-qr', title: 'Image QR Code', icon: 'image' },
+            { slug: 'paypal-to-qr', title: 'PayPal QR Code', icon: 'dollar-sign' },
+            { slug: 'zoom-to-qr', title: 'Zoom QR Code', icon: 'video' }
+        ];
+        
+        // Get current page slug to exclude it
+        const currentPath = window.location.pathname.replace(/\//g, '');
+        const availablePages = allQRPages.filter(page => page.slug !== currentPath);
+        
+        // Shuffle and pick 4 random pages
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        const randomPages = shuffle([...availablePages]).slice(0, 4);
+        
+        // Find and update the POPULAR QR TYPES section
+        setTimeout(function() {
+            // Look for the footer section with "POPULAR QR TYPES" text
+            const footerSections = document.querySelectorAll('footer, [class*="footer"], div');
+            footerSections.forEach(section => {
+                const headings = section.querySelectorAll('h3, h4, h5, p, span');
+                headings.forEach(heading => {
+                    if (heading.textContent && heading.textContent.toUpperCase().includes('POPULAR QR TYPES')) {
+                        // Found the section, now find the links container
+                        const parent = heading.parentElement;
+                        if (parent) {
+                            const linksContainer = parent.querySelector('div') || parent.nextElementSibling;
+                            if (linksContainer) {
+                                const links = linksContainer.querySelectorAll('a');
+                                if (links.length >= 4) {
+                                    // Update each link with random page
+                                    links.forEach((link, index) => {
+                                        if (index < 4 && randomPages[index]) {
+                                            link.href = '/' + randomPages[index].slug + '/';
+                                            // Update the text content (keep any icons)
+                                            const textNode = Array.from(link.childNodes).find(node => node.nodeType === 3);
+                                            if (textNode) {
+                                                textNode.textContent = randomPages[index].title;
+                                            } else {
+                                                // If no text node, check for span
+                                                const span = link.querySelector('span');
+                                                if (span) {
+                                                    span.textContent = randomPages[index].title;
+                                                } else {
+                                                    link.textContent = randomPages[index].title;
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        }, 500); // Wait for React to render
+    });
+    </script>
     
     <?php wp_footer(); ?>
 </body>
