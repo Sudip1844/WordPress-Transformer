@@ -57,6 +57,16 @@ The project runs a **PHP-based preview** that renders the WordPress theme templa
 
 ## Recent Changes
 
+- **2025-12-15**: Performance Optimization & Black Footer
+  - **OPTIMIZATIONS**:
+    - Removed unused NotFound.js (779 bytes saved)
+    - Removed unused app.js (61 bytes saved)
+    - Added router.php for proper /assets/ path handling
+  - **FOOTER STYLING**:
+    - Added black background (#000000) to footer
+    - White text and links for better contrast
+  - **ZIP UPDATE**: Final optimized ZIP size: 389KB
+
 - **2025-12-15**: Footer Cleanup & Dynamic QR Links Update
   - **FOOTER CLEANUP**:
     - Removed duplicate colorful "Popular QR Code Types" gradient section
