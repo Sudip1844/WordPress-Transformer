@@ -46,7 +46,7 @@ function myqrcodetool_setup() {
 add_action('after_setup_theme', 'myqrcodetool_setup');
 
 /**
- * Enqueue Scripts and Styles
+ * Enqueue Scripts and Styles - Optimized for per-page loading
  */
 function myqrcodetool_scripts() {
     wp_enqueue_style(
@@ -64,14 +64,84 @@ function myqrcodetool_scripts() {
     );
     
     wp_enqueue_script(
-        'myqrcodetool-app',
-        MYQRCODETOOL_URI . '/assets/js/app.js',
+        'myqrcodetool-vendor',
+        MYQRCODETOOL_URI . '/assets/js/vendor-CMjGaeKf.js',
         array(),
         MYQRCODETOOL_VERSION,
         true
     );
     
-    wp_localize_script('myqrcodetool-app', 'myqrcodetool_ajax', array(
+    wp_enqueue_script(
+        'myqrcodetool-header',
+        MYQRCODETOOL_URI . '/assets/js/Header-D99lOBCF.js',
+        array('myqrcodetool-vendor'),
+        MYQRCODETOOL_VERSION,
+        true
+    );
+    
+    wp_enqueue_script(
+        'myqrcodetool-index',
+        MYQRCODETOOL_URI . '/assets/js/index-B65U0c70.js',
+        array('myqrcodetool-vendor', 'myqrcodetool-header'),
+        MYQRCODETOOL_VERSION,
+        true
+    );
+    
+    if (is_page()) {
+        $template = get_page_template_slug();
+        
+        if ($template === 'page-templates/template-scanner.php' || is_page('scanner')) {
+            wp_enqueue_script(
+                'myqrcodetool-scanner',
+                MYQRCODETOOL_URI . '/assets/js/Scanner-DV43weYr.js',
+                array('myqrcodetool-index'),
+                MYQRCODETOOL_VERSION,
+                true
+            );
+        }
+        
+        if ($template === 'page-templates/template-faq.php' || is_page('faq')) {
+            wp_enqueue_script(
+                'myqrcodetool-faq',
+                MYQRCODETOOL_URI . '/assets/js/FAQ-D6MABQM8.js',
+                array('myqrcodetool-index'),
+                MYQRCODETOOL_VERSION,
+                true
+            );
+        }
+        
+        if ($template === 'page-templates/template-privacy.php' || is_page('privacy')) {
+            wp_enqueue_script(
+                'myqrcodetool-privacy',
+                MYQRCODETOOL_URI . '/assets/js/Privacy-D7SuySko.js',
+                array('myqrcodetool-index'),
+                MYQRCODETOOL_VERSION,
+                true
+            );
+        }
+        
+        if ($template === 'page-templates/template-support.php' || is_page('support')) {
+            wp_enqueue_script(
+                'myqrcodetool-support',
+                MYQRCODETOOL_URI . '/assets/js/Support-CSl2T0Fe.js',
+                array('myqrcodetool-index'),
+                MYQRCODETOOL_VERSION,
+                true
+            );
+        }
+        
+        if ($template === 'page-templates/template-download.php' || is_page('download')) {
+            wp_enqueue_script(
+                'myqrcodetool-download',
+                MYQRCODETOOL_URI . '/assets/js/Download-CZOGZnml.js',
+                array('myqrcodetool-index'),
+                MYQRCODETOOL_VERSION,
+                true
+            );
+        }
+    }
+    
+    wp_localize_script('myqrcodetool-index', 'myqrcodetool_ajax', array(
         'ajax_url' => admin_url('admin-ajax.php'),
         'nonce'    => wp_create_nonce('myqrcodetool_nonce'),
         'site_url' => home_url('/'),
@@ -81,12 +151,22 @@ function myqrcodetool_scripts() {
 add_action('wp_enqueue_scripts', 'myqrcodetool_scripts');
 
 /**
- * Add type="module" attribute to ES module scripts
- * This allows the browser to properly load ES modules and handle imports
+ * Add type="module" and defer attributes for optimized loading
  */
 function myqrcodetool_script_type_module($tag, $handle, $src) {
-    if ($handle === 'myqrcodetool-app') {
-        $tag = str_replace('<script ', '<script type="module" ', $tag);
+    $module_scripts = array(
+        'myqrcodetool-vendor',
+        'myqrcodetool-header',
+        'myqrcodetool-index',
+        'myqrcodetool-scanner',
+        'myqrcodetool-faq',
+        'myqrcodetool-privacy',
+        'myqrcodetool-support',
+        'myqrcodetool-download',
+    );
+    
+    if (in_array($handle, $module_scripts)) {
+        $tag = str_replace('<script ', '<script type="module" defer ', $tag);
     }
     
     return $tag;
