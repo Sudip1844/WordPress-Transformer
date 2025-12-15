@@ -4,13 +4,21 @@
 
 This project converts a static React-based QR Code Generator website into a WordPress-ready theme. The original site was built with React + Vite and has been transformed into a complete WordPress theme package.
 
+## Current Setup
+
+The project now runs a **live WordPress preview** with the theme activated. You can see exactly how your theme will look when installed on a WordPress site.
+
 ## Project Structure
 
 ```
-├── server.js                              # Node.js server for theme download
-├── myqrcodetool-wordpress-theme.zip       # Ready-to-install WordPress theme
+├── wordpress-preview/                     # Live WordPress installation (SQLite)
+│   ├── wp-content/
+│   │   ├── themes/myqrcodetool/          # Your WordPress theme (active)
+│   │   └── plugins/sqlite-database-integration/
+│   ├── wp-config.php                      # WordPress configuration
+│   └── router.php                         # PHP built-in server router
 ├── wordpress-theme/
-│   ├── myqrcodetool/                      # WordPress theme folder
+│   ├── myqrcodetool/                      # WordPress theme source
 │   │   ├── style.css                      # Theme info and styles
 │   │   ├── functions.php                  # Theme functions
 │   │   ├── header.php                     # Site header template
@@ -23,8 +31,16 @@ This project converts a static React-based QR Code Generator website into a Word
 │   │   ├── page-templates/                # Custom page templates
 │   │   └── inc/                           # Include files
 │   └── WORDPRESS-INTEGRATION-GUIDE.md     # Detailed documentation
-└── extracted_site/                        # Original static site files
+├── extracted_site/                        # Original static site files
+├── myqrcodetool-wordpress-theme.zip       # Ready-to-install WordPress theme
+└── server.js                              # Legacy Node.js server (not used)
 ```
+
+## WordPress Admin Access
+
+- URL: /wp-admin/
+- Username: admin
+- Password: admin123
 
 ## Features Implemented
 
@@ -34,16 +50,27 @@ This project converts a static React-based QR Code Generator website into a Word
 4. **Google Tag Manager**: Integrated with customizer settings
 5. **JavaScript Preservation**: All original React functionality preserved
 6. **Tailwind CSS**: Complete styling included
+7. **SQLite Database**: No MySQL required for preview
 
 ## How to Use
 
-1. Run the server to access the download page
-2. Download the WordPress theme ZIP file
-3. Install on any WordPress site via Appearance → Themes → Add New → Upload Theme
-4. Follow the installation guide in WORDPRESS-INTEGRATION-GUIDE.md
+### Preview (Current Setup)
+- The WordPress preview is running with your theme active
+- Visit the site to see how it looks
+- Access /wp-admin/ to customize settings
+
+### Download for Production
+- Download `myqrcodetool-wordpress-theme.zip`
+- Install on any WordPress site via Appearance > Themes > Add New > Upload Theme
+- Follow the installation guide in WORDPRESS-INTEGRATION-GUIDE.md
 
 ## Recent Changes
 
+- **2024-12-15**: WordPress live preview setup
+  - Installed WordPress with SQLite database
+  - Activated myqrcodetool theme
+  - Configured PHP server for preview
+  
 - **2024-12-12**: Initial WordPress theme conversion complete
   - Created all PHP template files
   - Organized CSS and JavaScript assets
