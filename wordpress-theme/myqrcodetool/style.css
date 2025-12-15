@@ -14,3 +14,31 @@ This theme converts a static QR Code Generator website to WordPress.
 */
 
 @import url('assets/css/main.css');
+
+/* Footer Background Override */
+footer,
+[class*="footer"],
+.bg-card.border-t,
+.bg-gray-900,
+.bg-slate-900 {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Footer text color for better contrast on black */
+footer a,
+footer p,
+footer h3,
+footer h4,
+footer span,
+.bg-card.border-t a,
+.bg-card.border-t p,
+.bg-card.border-t h3,
+.bg-card.border-t h4,
+.bg-card.border-t span {
+    color: #ffffff !important;
+}
+
+.bg-card.border-t a:hover {
+    color: #10b981 !important;
+}
