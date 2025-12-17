@@ -57,6 +57,28 @@ The project runs a **PHP-based preview** that renders the WordPress theme templa
 
 ## Recent Changes
 
+- **2025-12-17**: Dark Theme Support Added
+  - **DARK THEME TOGGLE**:
+    - Added sun/moon toggle button (fixed position, next to menu button)
+    - Smooth CSS transitions when switching themes
+    - localStorage persistence - remembers user preference
+    - Respects system preference (prefers-color-scheme) on first visit
+  - **CSS VARIABLES**:
+    - Light theme: White backgrounds, dark text, emerald accents
+    - Dark theme: Slate backgrounds (#0f172a, #1e293b), light text, teal accents (#34d399)
+  - **STYLED ELEMENTS**:
+    - Backgrounds, cards, text, borders, inputs, header, shadows
+  - **TOGGLE BUTTON DESIGN**:
+    - Rounded button with gradient background
+    - Animated sun icon (light mode) / moon icon (dark mode)
+    - Hover effects with emerald glow
+  - Theme ZIP updated with dark mode support
+
+- **2025-12-17**: Admin Page for Auto-Create Pages
+  - Added admin menu: Appearance → Create QR Pages
+  - One-click button to create all 17 pages automatically
+  - Pages created with proper SEO, templates, and canonical URLs
+
 - **2025-12-15**: Performance Optimization & Black Footer
   - **OPTIMIZATIONS**:
     - Removed unused NotFound.js (779 bytes saved)
