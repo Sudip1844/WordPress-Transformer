@@ -524,3 +524,166 @@ article {
     transform: translateY(0);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+/* ========================================
+   PRESERVE ICON COLORS IN BOTH THEMES
+   ======================================== */
+
+/* QR Code Icon in Header and Footer - Keep original gradient colors */
+[data-theme="dark"] .qr-logo-icon,
+[data-theme="dark"] header svg[class*="qr"],
+[data-theme="dark"] footer svg[class*="qr"],
+[data-theme="dark"] [class*="logo"] svg {
+    color: inherit !important;
+}
+
+/* Keep gradient text colors for QR icon */
+[data-theme="dark"] .text-emerald-500.text-emerald-400,
+[data-theme="dark"] [class*="from-emerald"][class*="to-teal"] {
+    background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* How to Use Section Icons - Keep same colors */
+[data-theme="dark"] [class*="how-to-use"] svg,
+[data-theme="dark"] [class*="steps"] svg,
+[data-theme="dark"] .step-icon,
+[data-theme="dark"] [class*="feature"] svg {
+    color: #10b981 !important;
+}
+
+/* Share Button - Keep same colors in both themes */
+[data-theme="dark"] [class*="share"] button,
+[data-theme="dark"] button[class*="share"],
+[data-theme="dark"] .share-btn {
+    background-color: #10b981 !important;
+    color: white !important;
+    border-color: #10b981 !important;
+}
+
+[data-theme="dark"] [class*="share"] svg,
+[data-theme="dark"] .share-btn svg {
+    color: white !important;
+}
+
+/* ========================================
+   DARK MODE AURORA EFFECT FOR HEADER
+   ======================================== */
+
+/* Aurora background animation for dark mode header */
+[data-theme="dark"] header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        125deg,
+        rgba(99, 102, 241, 0.15) 0%,
+        rgba(139, 92, 246, 0.1) 25%,
+        rgba(16, 185, 129, 0.1) 50%,
+        rgba(34, 211, 153, 0.15) 75%,
+        rgba(59, 130, 246, 0.1) 100%
+    );
+    background-size: 400% 400%;
+    animation: darkAuroraGradient 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes darkAuroraGradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 50% 100%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 0%;
+    }
+}
+
+/* Add subtle glow border to header in dark mode */
+[data-theme="dark"] header {
+    position: relative;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.3) !important;
+}
+
+[data-theme="dark"] header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(99, 102, 241, 0.5) 20%,
+        rgba(139, 92, 246, 0.7) 40%,
+        rgba(16, 185, 129, 0.7) 60%,
+        rgba(59, 130, 246, 0.5) 80%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: borderGlow 3s linear infinite;
+}
+
+@keyframes borderGlow {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ========================================
+   ADDITIONAL ICON COLOR PRESERVATION
+   ======================================== */
+
+/* Lucide icons - preserve original colors */
+[data-theme="dark"] svg[class*="lucide"] {
+    color: inherit;
+}
+
+/* Specific icon colors that should stay same */
+[data-theme="dark"] .text-emerald-500 svg,
+[data-theme="dark"] .text-green-500 svg,
+[data-theme="dark"] [class*="emerald"] svg,
+[data-theme="dark"] [class*="green"] svg {
+    color: #10b981 !important;
+}
+
+[data-theme="dark"] .text-blue-500 svg,
+[data-theme="dark"] [class*="blue"] svg {
+    color: #3b82f6 !important;
+}
+
+[data-theme="dark"] .text-purple-500 svg,
+[data-theme="dark"] .text-violet-500 svg,
+[data-theme="dark"] [class*="purple"] svg,
+[data-theme="dark"] [class*="violet"] svg {
+    color: #8b5cf6 !important;
+}
+
+/* Keep feature/step icons with original vibrant colors */
+[data-theme="dark"] .bg-emerald-100,
+[data-theme="dark"] .bg-green-100 {
+    background-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+[data-theme="dark"] .bg-blue-100 {
+    background-color: rgba(59, 130, 246, 0.2) !important;
+}
+
+[data-theme="dark"] .bg-purple-100,
+[data-theme="dark"] .bg-violet-100 {
+    background-color: rgba(139, 92, 246, 0.2) !important;
+}

@@ -41,56 +41,67 @@
             });
         }
         
-        // Scroll detection to hide/show toggle when overlapping with main content
+        // Scroll detection to hide/show toggle when main content section overlaps
         function checkToggleVisibility() {
             if (!toggleContainer) return;
             
-            var toggleRect = toggleContainer.getBoundingClientRect();
-            var toggleCenterX = toggleRect.left + toggleRect.width / 2;
-            var toggleCenterY = toggleRect.top + toggleRect.height / 2;
-            
-            // Find elements that might overlap with the toggle
-            var mainContent = document.querySelector('.qr-generator-section, [class*="generator"], main, #root > div:first-child > div:nth-child(2)');
-            var header = document.querySelector('header, nav, .sticky.top-0');
-            
-            // Check if header is in sticky mode and toggle is within header area
+            var header = document.querySelector('header');
             var headerRect = header ? header.getBoundingClientRect() : null;
-            var isInHeaderArea = headerRect && toggleRect.top >= headerRect.top && toggleRect.bottom <= headerRect.bottom + 10;
+            var toggleRect = toggleContainer.getBoundingClientRect();
             
-            // Check if main content is overlapping with toggle position
-            var elementsAtPoint = document.elementsFromPoint(toggleCenterX, toggleCenterY);
-            var isOverlapping = false;
+            // If toggle is within header area, always show it
+            if (headerRect && toggleRect.top >= headerRect.top && toggleRect.bottom <= headerRect.bottom + 20) {
+                toggleContainer.classList.remove('is-hidden');
+                return;
+            }
             
-            elementsAtPoint.forEach(function(el) {
-                // Skip the toggle itself and its children
-                if (el === toggleContainer || el === toggleBtn || toggleContainer.contains(el)) return;
-                // Skip header elements
-                if (header && header.contains(el)) return;
-                // Check if it's a main content element with significant z-index or stacking
-                var style = window.getComputedStyle(el);
-                var zIndex = parseInt(style.zIndex) || 0;
-                var position = style.position;
+            // Find the main QR generator card - look for the dark container with specific size
+            var mainContentSections = document.querySelectorAll('div[class*="bg-"][class*="rounded"]');
+            var foundOverlap = false;
+            
+            mainContentSections.forEach(function(section) {
+                if (foundOverlap) return;
                 
-                // If we find a non-static element with content, consider it overlapping
-                if ((position === 'fixed' || position === 'sticky' || position === 'absolute') && zIndex > 0 && zIndex < 9999) {
-                    isOverlapping = true;
+                var rect = section.getBoundingClientRect();
+                // Only check sections that are large enough (min 300px height) to be the main card
+                if (rect.height < 300) return;
+                // Skip if section is above viewport
+                if (rect.bottom < 0) return;
+                
+                // Check if this section overlaps with toggle position
+                var isOverlapping = rect.top < toggleRect.bottom && 
+                                   rect.bottom > toggleRect.top &&
+                                   rect.left < toggleRect.right &&
+                                   rect.right > toggleRect.left;
+                
+                if (isOverlapping) {
+                    foundOverlap = true;
                 }
             });
             
-            // Show/hide based on overlap
-            if (isOverlapping && !isInHeaderArea) {
+            if (foundOverlap) {
                 toggleContainer.classList.add('is-hidden');
             } else {
                 toggleContainer.classList.remove('is-hidden');
             }
         }
         
-        // Run on scroll and resize
-        window.addEventListener('scroll', checkToggleVisibility, { passive: true });
+        // Run on scroll and resize with throttling
+        var scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) return;
+            scrollTimeout = setTimeout(function() {
+                checkToggleVisibility();
+                scrollTimeout = null;
+            }, 50);
+        }, { passive: true });
+        
         window.addEventListener('resize', checkToggleVisibility, { passive: true });
         
-        // Initial check
-        setTimeout(checkToggleVisibility, 500);
+        // Initial check after page loads
+        window.addEventListener('load', function() {
+            setTimeout(checkToggleVisibility, 300);
+        });
     })();
     </script>
     
