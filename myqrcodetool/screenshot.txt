@@ -1,0 +1,4 @@
+Note: Add a screenshot.png file (1200x900 pixels recommended) 
+to this folder for WordPress theme preview.
+
+The screenshot should show your QR Code Generator website's homepage.

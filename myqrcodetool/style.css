@@ -1,0 +1,689 @@
+/*
+Theme Name: My QRcode Tool
+Theme URI: https://myqrcodetool.com/
+Author: My Qrcode Tool
+Author URI: https://myqrcodetool.com/
+Description: A professional QR Code Generator WordPress theme with support for multiple QR code types including URL, Text, WiFi, WhatsApp, vCard, Email, SMS, Phone, Event, Image, PayPal, Zoom, and more. Features custom logo support, multiple export formats, and SEO-optimized pages.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: myqrcodetool
+Tags: qr-code, generator, utility, responsive, custom-logo, seo-ready
+
+This theme converts a static QR Code Generator website to WordPress.
+*/
+
+@import url('assets/css/main.css');
+
+/* Footer Background Override - Light Mode */
+footer,
+[class*="footer"],
+.bg-card.border-t,
+.bg-gray-900,
+.bg-slate-900 {
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+}
+
+/* Footer text color for better contrast */
+footer a,
+footer p,
+footer h3,
+footer h4,
+footer span,
+.bg-card.border-t a,
+.bg-card.border-t p,
+.bg-card.border-t h3,
+.bg-card.border-t h4,
+.bg-card.border-t span {
+    color: #ffffff !important;
+}
+
+.bg-card.border-t a:hover {
+    color: #10b981 !important;
+}
+
+/* ========================================
+   DARK THEME SUPPORT - ENHANCED
+   ======================================== */
+
+/* CSS Variables for Light Theme (Default) */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f8fafc;
+    --bg-input: #ffffff;
+    --bg-hero: linear-gradient(135deg, #ffffff 0%, #f0f9ff 50%, #e0f2fe 100%);
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
+    --border-light: #f1f5f9;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --emerald-primary: #10b981;
+    --emerald-hover: #059669;
+    --emerald-light: #d1fae5;
+    --emerald-dark: #065f46;
+    --accent-purple: #8b5cf6;
+    --accent-blue: #3b82f6;
+    --accent-indigo: #6366f1;
+    --accent-cyan: #22d3ee;
+}
+
+/* Dark Theme Variables - Enhanced Color Palette */
+[data-theme="dark"] {
+    --bg-primary: #0b1120;
+    --bg-secondary: #131c31;
+    --bg-tertiary: #1a2744;
+    --bg-card: #1e2d4a;
+    --bg-card-hover: #243654;
+    --bg-input: #1e2d4a;
+    --bg-hero: linear-gradient(135deg, #0b1120 0%, #131c31 50%, #1a2744 100%);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-color: #2d4163;
+    --border-light: #1e2d4a;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --emerald-primary: #34d399;
+    --emerald-hover: #10b981;
+    --emerald-light: #065f46;
+    --emerald-dark: #d1fae5;
+    --accent-purple: #a78bfa;
+    --accent-blue: #60a5fa;
+    --accent-indigo: #818cf8;
+    --accent-cyan: #22d3ee;
+}
+
+/* Apply Dark Theme Base Styles */
+[data-theme="dark"] body,
+[data-theme="dark"] #root {
+    background: var(--bg-hero) !important;
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] html {
+    background-color: var(--bg-primary) !important;
+}
+
+/* ========================================
+   DARK THEME - HERO SECTION
+   ======================================== */
+
+[data-theme="dark"] .dynamic-header-bg,
+[data-theme="dark"] [class*="bg-gradient-to-br"],
+[data-theme="dark"] [class*="bg-gradient-to-b"],
+[data-theme="dark"] [class*="bg-gradient-to-r"],
+[data-theme="dark"] [class*="from-white"],
+[data-theme="dark"] [class*="from-slate-50"],
+[data-theme="dark"] [class*="to-blue-50"],
+[data-theme="dark"] [class*="to-emerald-50"] {
+    background: linear-gradient(135deg, #0b1120 0%, #131c31 40%, #1a2744 70%, #1e3a5f 100%) !important;
+}
+
+[data-theme="dark"] [class*="from-emerald"][class*="to-teal"],
+[data-theme="dark"] [class*="from-blue"][class*="to-purple"] {
+    background: linear-gradient(135deg, #065f46 0%, #134e4a 50%, #1e3a5f 100%) !important;
+}
+
+/* ========================================
+   DARK THEME - CONTAINERS & CARDS
+   ======================================== */
+
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .bg-slate-50,
+[data-theme="dark"] .bg-gray-50,
+[data-theme="dark"] .bg-background,
+[data-theme="dark"] [class*="bg-white\\/"],
+[data-theme="dark"] .bg-white\/80,
+[data-theme="dark"] .bg-white\/90,
+[data-theme="dark"] .bg-white\/95 {
+    background-color: var(--bg-card) !important;
+}
+
+[data-theme="dark"] .bg-slate-100,
+[data-theme="dark"] .bg-gray-100,
+[data-theme="dark"] .bg-blue-50,
+[data-theme="dark"] .bg-purple-50,
+[data-theme="dark"] .bg-emerald-50,
+[data-theme="dark"] .bg-indigo-50,
+[data-theme="dark"] .bg-cyan-50,
+[data-theme="dark"] .bg-teal-50 {
+    background-color: var(--bg-tertiary) !important;
+}
+
+[data-theme="dark"] .bg-card,
+[data-theme="dark"] .bg-muted,
+[data-theme="dark"] [class*="rounded-lg"][class*="border"],
+[data-theme="dark"] [class*="rounded-xl"][class*="border"],
+[data-theme="dark"] [class*="rounded-2xl"][class*="border"],
+[data-theme="dark"] [class*="rounded-3xl"][class*="border"],
+[data-theme="dark"] .card {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Card hover states */
+[data-theme="dark"] .bg-card:hover,
+[data-theme="dark"] .card:hover {
+    background-color: var(--bg-card-hover) !important;
+}
+
+/* ========================================
+   DARK THEME - SPECIAL SECTIONS
+   ======================================== */
+
+/* QR Generator Section */
+[data-theme="dark"] .qr-generator-section {
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%) !important;
+}
+
+/* ========================================
+   DARK THEME - TEXT COLORS
+   ======================================== */
+
+[data-theme="dark"] .text-slate-800,
+[data-theme="dark"] .text-slate-900,
+[data-theme="dark"] .text-gray-800,
+[data-theme="dark"] .text-gray-900,
+[data-theme="dark"] .text-foreground,
+[data-theme="dark"] h1, [data-theme="dark"] h2, 
+[data-theme="dark"] h3, [data-theme="dark"] h4,
+[data-theme="dark"] h5, [data-theme="dark"] h6 {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-slate-600,
+[data-theme="dark"] .text-slate-500,
+[data-theme="dark"] .text-slate-700,
+[data-theme="dark"] .text-gray-600,
+[data-theme="dark"] .text-gray-500,
+[data-theme="dark"] .text-gray-700,
+[data-theme="dark"] .text-muted-foreground,
+[data-theme="dark"] p,
+[data-theme="dark"] span:not(.dynamic-neon-title):not([class*="text-emerald"]):not([class*="text-green"]):not([class*="text-blue"]):not([class*="text-purple"]) {
+    color: var(--text-secondary) !important;
+}
+
+/* Keep accent colors visible */
+[data-theme="dark"] .text-emerald-500,
+[data-theme="dark"] .text-emerald-600,
+[data-theme="dark"] .text-green-500,
+[data-theme="dark"] .text-green-600 {
+    color: var(--emerald-primary) !important;
+}
+
+[data-theme="dark"] .text-blue-500,
+[data-theme="dark"] .text-blue-600 {
+    color: var(--accent-blue) !important;
+}
+
+[data-theme="dark"] .text-purple-500,
+[data-theme="dark"] .text-purple-600,
+[data-theme="dark"] .text-indigo-500,
+[data-theme="dark"] .text-indigo-600 {
+    color: var(--accent-purple) !important;
+}
+
+/* ========================================
+   DARK THEME - BORDERS
+   ======================================== */
+
+[data-theme="dark"] .border,
+[data-theme="dark"] .border-slate-200,
+[data-theme="dark"] .border-slate-100,
+[data-theme="dark"] .border-gray-200,
+[data-theme="dark"] .border-gray-100,
+[data-theme="dark"] .border-blue-200,
+[data-theme="dark"] .border-blue-100,
+[data-theme="dark"] .border-border,
+[data-theme="dark"] .border-t,
+[data-theme="dark"] .border-b,
+[data-theme="dark"] .border-l,
+[data-theme="dark"] .border-r {
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .border-emerald-200,
+[data-theme="dark"] .border-emerald-300,
+[data-theme="dark"] .border-green-200 {
+    border-color: #065f46 !important;
+}
+
+/* ========================================
+   DARK THEME - FORM INPUTS
+   ======================================== */
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select,
+[data-theme="dark"] .input,
+[data-theme="dark"] [class*="input"] {
+    background-color: var(--bg-input) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+    border-color: var(--accent-indigo) !important;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3) !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+/* ========================================
+   DARK THEME - BUTTONS
+   ======================================== */
+
+[data-theme="dark"] .bg-emerald-500,
+[data-theme="dark"] .bg-emerald-600,
+[data-theme="dark"] .bg-green-500,
+[data-theme="dark"] .bg-green-600 {
+    background-color: var(--emerald-primary) !important;
+    color: #0b1120 !important;
+}
+
+[data-theme="dark"] [class*="bg-emerald"]:hover,
+[data-theme="dark"] [class*="bg-green"]:hover {
+    background-color: var(--emerald-hover) !important;
+}
+
+/* Outline buttons */
+[data-theme="dark"] .border-emerald-500,
+[data-theme="dark"] .border-emerald-600 {
+    border-color: var(--emerald-primary) !important;
+}
+
+/* ========================================
+   DARK THEME - HEADER & NAVIGATION
+   ======================================== */
+
+[data-theme="dark"] header,
+[data-theme="dark"] nav,
+[data-theme="dark"] .sticky.top-0,
+[data-theme="dark"] .dynamic-header-bg {
+    background-color: rgba(11, 17, 32, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* ========================================
+   DARK THEME - FOOTER
+   ======================================== */
+
+[data-theme="dark"] footer,
+[data-theme="dark"] [class*="footer"],
+[data-theme="dark"] .bg-card.border-t {
+    background: linear-gradient(180deg, #0b1120 0%, #060912 100%) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* ========================================
+   DARK THEME - SHADOWS & EFFECTS
+   ======================================== */
+
+[data-theme="dark"] .shadow,
+[data-theme="dark"] .shadow-sm,
+[data-theme="dark"] .shadow-md,
+[data-theme="dark"] .shadow-lg,
+[data-theme="dark"] .shadow-xl {
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), 
+                0 2px 8px -2px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(45, 65, 99, 0.3) !important;
+}
+
+/* Glow effects for accents */
+[data-theme="dark"] .ring-emerald-500,
+[data-theme="dark"] .ring-emerald-400 {
+    --tw-ring-color: rgba(52, 211, 153, 0.4) !important;
+}
+
+/* ========================================
+   DARK THEME - SPECIAL ELEMENTS
+   ======================================== */
+
+/* QR Code preview area */
+[data-theme="dark"] [class*="qr-preview"],
+[data-theme="dark"] [class*="qr-code"],
+[data-theme="dark"] canvas {
+    background-color: #ffffff !important;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+/* Tabs and navigation pills */
+[data-theme="dark"] [role="tablist"],
+[data-theme="dark"] [class*="tabs"] {
+    background-color: var(--bg-tertiary) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] [role="tab"][aria-selected="true"],
+[data-theme="dark"] [class*="tab"][class*="active"] {
+    background-color: var(--accent-indigo) !important;
+    color: white !important;
+}
+
+/* Dropdown menus */
+[data-theme="dark"] [role="menu"],
+[data-theme="dark"] [class*="dropdown"],
+[data-theme="dark"] [class*="popover"] {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* ========================================
+   SMOOTH TRANSITIONS
+   ======================================== */
+
+body,
+#root,
+header,
+nav,
+.bg-white,
+.bg-card,
+.text-slate-800,
+.border,
+input,
+textarea,
+footer,
+div,
+section,
+article {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ========================================
+   THEME TOGGLE BUTTON STYLES
+   ======================================== */
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 2px solid #10b981;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    margin-right: 8px;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    border-color: #10b981;
+}
+
+.theme-toggle-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+}
+
+/* Sun Icon */
+.theme-toggle-btn .sun-icon {
+    width: 24px;
+    height: 24px;
+    color: #f59e0b;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+}
+
+/* Moon Icon */
+.theme-toggle-btn .moon-icon {
+    width: 24px;
+    height: 24px;
+    color: #6366f1;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+}
+
+/* Light Mode (Default) - Show Sun */
+.theme-toggle-btn .sun-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+/* Dark Mode - Show Moon, Hide Sun */
+[data-theme="dark"] .theme-toggle-btn {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-color: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+[data-theme="dark"] .theme-toggle-btn:hover {
+    border-color: #34d399;
+    box-shadow: 0 4px 15px rgba(52, 211, 153, 0.3);
+}
+
+[data-theme="dark"] .theme-toggle-btn .sun-icon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+}
+
+[data-theme="dark"] .theme-toggle-btn .moon-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+/* Toggle Button Container */
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Fixed Position Theme Toggle - Always visible next to menu */
+.theme-toggle-fixed {
+    position: fixed;
+    top: 12px;
+    right: 60px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .theme-toggle-fixed {
+        right: 80px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .theme-toggle-fixed {
+        right: 100px;
+    }
+}
+
+/* Theme Toggle Hidden/Disabled State */
+.theme-toggle-fixed.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.theme-toggle-fixed:not(.is-hidden) {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ========================================
+   PRESERVE ICON COLORS IN BOTH THEMES
+   ======================================== */
+
+/* QR Code Icon in Header and Footer - Keep original gradient colors */
+[data-theme="dark"] .qr-logo-icon,
+[data-theme="dark"] header svg[class*="qr"],
+[data-theme="dark"] footer svg[class*="qr"],
+[data-theme="dark"] [class*="logo"] svg {
+    color: inherit !important;
+}
+
+/* Keep gradient text colors for QR icon */
+[data-theme="dark"] .text-emerald-500.text-emerald-400,
+[data-theme="dark"] [class*="from-emerald"][class*="to-teal"] {
+    background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* How to Use Section Icons - Keep same colors */
+[data-theme="dark"] [class*="how-to-use"] svg,
+[data-theme="dark"] [class*="steps"] svg,
+[data-theme="dark"] .step-icon,
+[data-theme="dark"] [class*="feature"] svg {
+    color: #10b981 !important;
+}
+
+/* Share Button - Keep same colors in both themes */
+[data-theme="dark"] [class*="share"] button,
+[data-theme="dark"] button[class*="share"],
+[data-theme="dark"] .share-btn {
+    background-color: #10b981 !important;
+    color: white !important;
+    border-color: #10b981 !important;
+}
+
+[data-theme="dark"] [class*="share"] svg,
+[data-theme="dark"] .share-btn svg {
+    color: white !important;
+}
+
+/* ========================================
+   DARK MODE AURORA EFFECT FOR HEADER
+   ======================================== */
+
+/* Aurora background animation for dark mode header */
+[data-theme="dark"] header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        125deg,
+        rgba(99, 102, 241, 0.15) 0%,
+        rgba(139, 92, 246, 0.1) 25%,
+        rgba(16, 185, 129, 0.1) 50%,
+        rgba(34, 211, 153, 0.15) 75%,
+        rgba(59, 130, 246, 0.1) 100%
+    );
+    background-size: 400% 400%;
+    animation: darkAuroraGradient 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes darkAuroraGradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 50% 100%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 0%;
+    }
+}
+
+/* Add subtle glow border to header in dark mode */
+[data-theme="dark"] header {
+    position: relative;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.3) !important;
+}
+
+[data-theme="dark"] header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(99, 102, 241, 0.5) 20%,
+        rgba(139, 92, 246, 0.7) 40%,
+        rgba(16, 185, 129, 0.7) 60%,
+        rgba(59, 130, 246, 0.5) 80%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: borderGlow 3s linear infinite;
+}
+
+@keyframes borderGlow {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ========================================
+   ADDITIONAL ICON COLOR PRESERVATION
+   ======================================== */
+
+/* Lucide icons - preserve original colors */
+[data-theme="dark"] svg[class*="lucide"] {
+    color: inherit;
+}
+
+/* Specific icon colors that should stay same */
+[data-theme="dark"] .text-emerald-500 svg,
+[data-theme="dark"] .text-green-500 svg,
+[data-theme="dark"] [class*="emerald"] svg,
+[data-theme="dark"] [class*="green"] svg {
+    color: #10b981 !important;
+}
+
+[data-theme="dark"] .text-blue-500 svg,
+[data-theme="dark"] [class*="blue"] svg {
+    color: #3b82f6 !important;
+}
+
+[data-theme="dark"] .text-purple-500 svg,
+[data-theme="dark"] .text-violet-500 svg,
+[data-theme="dark"] [class*="purple"] svg,
+[data-theme="dark"] [class*="violet"] svg {
+    color: #8b5cf6 !important;
+}
+
+/* Keep feature/step icons with original vibrant colors */
+[data-theme="dark"] .bg-emerald-100,
+[data-theme="dark"] .bg-green-100 {
+    background-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+[data-theme="dark"] .bg-blue-100 {
+    background-color: rgba(59, 130, 246, 0.2) !important;
+}
+
+[data-theme="dark"] .bg-purple-100,
+[data-theme="dark"] .bg-violet-100 {
+    background-color: rgba(139, 92, 246, 0.2) !important;
+}
