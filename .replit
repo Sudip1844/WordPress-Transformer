@@ -22,13 +22,13 @@ args = "WordPress Theme Preview"
 name = "WordPress Theme Preview"
 author = "agent"
 
-[workflows.workflow.metadata]
-outputType = "webview"
-
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "php -S 0.0.0.0:5000 -t \"extracted static html_site\""
+args = "php -S 0.0.0.0:5000 -t myqrcodetool"
 waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
 
 [[ports]]
 localPort = 5000
