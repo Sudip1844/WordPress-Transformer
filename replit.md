@@ -1,37 +1,34 @@
-# My QRcode Tool - WordPress Theme Conversion
+# My QRcode Tool - WordPress Theme
 
 ## Project Overview
 
-This project converts a static React-based QR Code Generator website into a WordPress-ready theme. The original site was built with React + Vite and has been transformed into a complete WordPress theme package.
+This project is a complete WordPress-based QR Code Generator website. The myqrcodetool theme is fully functional and running on WordPress with SQLite database.
 
 ## Current Setup
 
-The project runs a **PHP-based preview** that renders the WordPress theme templates directly in Replit's internal browser - no full WordPress installation required.
+The project runs a **full WordPress installation** with SQLite database in Replit. The myqrcodetool theme is activated and fully functional.
 
 ## Project Structure
 
 ```
-├── preview/                               # PHP preview server
-│   ├── index.php                          # Entry point
-│   ├── wp-stubs.php                       # WordPress function stubs
-│   └── theme/                             # Symlink to theme folder
-├── wordpress-theme/
-│   ├── myqrcodetool/                      # WordPress theme source
-│   │   ├── style.css                      # Theme info and styles
-│   │   ├── functions.php                  # Theme functions
-│   │   ├── header.php                     # Site header template
-│   │   ├── footer.php                     # Site footer template
-│   │   ├── index.php                      # Default template
-│   │   ├── page.php                       # Page template
-│   │   ├── front-page.php                 # Homepage template
-│   │   ├── 404.php                        # 404 error page
-│   │   ├── assets/                        # CSS/JS/Images
-│   │   ├── page-templates/                # Custom page templates
-│   │   └── inc/                           # Include files
-│   └── WORDPRESS-INTEGRATION-GUIDE.md     # Detailed documentation
-├── extracted_site/                        # Original static site files
-├── myqrcodetool-wordpress-theme.zip       # Ready-to-install WordPress theme
-└── server.js                              # Legacy Node.js server (backup)
+├── wordpress/                             # Full WordPress installation
+│   ├── wp-config.php                      # WordPress configuration (SQLite)
+│   ├── wp-content/
+│   │   ├── db.php                         # SQLite database driver
+│   │   ├── themes/
+│   │   │   └── myqrcodetool/              # Active WordPress theme
+│   │   │       ├── style.css              # Theme info and styles
+│   │   │       ├── functions.php          # Theme functions
+│   │   │       ├── header.php             # Site header template
+│   │   │       ├── footer.php             # Site footer template
+│   │   │       ├── index.php              # Default template
+│   │   │       ├── assets/                # CSS/JS/Images
+│   │   │       └── page-templates/        # Custom page templates
+│   │   └── database/                      # SQLite database files
+│   └── wp-admin/                          # WordPress admin panel
+├── myqrcodetool/                          # Theme source backup
+├── extracted static html_site/            # Static HTML version backup
+└── attached_assets/                       # Uploaded files
 ```
 
 ## Features Implemented
@@ -46,16 +43,26 @@ The project runs a **PHP-based preview** that renders the WordPress theme templa
 ## How to Use
 
 ### Preview (Current Setup)
-- The PHP preview is running with your theme active
-- Visit the webview to see how your theme looks
-- Edit files in wordpress-theme/myqrcodetool/ to make changes
+- The WordPress site is running with your theme active
+- Visit the webview to see the live WordPress website
+- Edit theme files in wordpress/wp-content/themes/myqrcodetool/ to make changes
+
+### WordPress Admin Access
+- Visit /wp-admin/ in the webview
+- Username: admin
+- Password: admin123
 
 ### Download for Production
-- Download `myqrcodetool-wordpress-theme.zip`
+- You can export the theme from wordpress/wp-content/themes/myqrcodetool/
 - Install on any WordPress site via Appearance > Themes > Add New > Upload Theme
-- Follow the installation guide in WORDPRESS-INTEGRATION-GUIDE.md
 
 ## Recent Changes
+
+- **2025-12-18**: Full WordPress Setup with SQLite
+  - Installed complete WordPress 6.9
+  - Configured SQLite database for WordPress
+  - Activated myqrcodetool theme
+  - Added proxy detection for Replit environment
 
 - **2025-12-17**: Enhanced Dark Theme with Aurora Effects
   - **TOGGLE VISIBILITY FIX**:
