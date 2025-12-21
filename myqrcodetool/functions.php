@@ -237,6 +237,14 @@ function myqrcodetool_scripts() {
         true
     );
     
+    wp_enqueue_script(
+        'myqrcodetool-header-button-sync',
+        MYQRCODETOOL_URI . '/assets/js/header-button-sync.js',
+        array('myqrcodetool-index'),
+        MYQRCODETOOL_VERSION,
+        true
+    );
+    
     if (is_page()) {
         $template = get_page_template_slug();
         
