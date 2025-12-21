@@ -55,6 +55,7 @@ function myqrcodetool_create_pages_on_activation() {
     
     // Map pages to their templates
     $page_templates = array(
+        'home' => 'page-templates/template-qr-generator.php',
         'url-to-qr' => 'page-templates/template-qr-generator.php',
         'text-to-qr' => 'page-templates/template-qr-generator.php',
         'wifi-to-qr' => 'page-templates/template-qr-generator.php',
