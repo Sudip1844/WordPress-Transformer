@@ -469,6 +469,13 @@ function myqrcodetool_faq_schema($faqs, $page_title, $page_url) {
 function myqrcodetool_create_pages_on_activation() {
     $pages_to_create = array(
         array(
+            'slug' => 'home',
+            'title' => 'QR Code Generator - Free, Custom Logo & Many More',
+            'template' => 'front-page.php',
+            'meta_description' => 'Free QR Code Generator for URLs, WiFi, Contacts, Events, Payments, and more. Create professional QR codes instantly with custom logos and designs.',
+            'meta_keywords' => 'free qr code generator, qr code maker, custom qr code, qr code with logo'
+        ),
+        array(
             'slug' => 'url-to-qr',
             'title' => 'URL to QR Code Generator',
             'template' => 'page-templates/template-qr-generator.php',
@@ -631,6 +638,50 @@ function myqrcodetool_create_pages_on_activation() {
     flush_rewrite_rules();
 }
 add_action('after_switch_theme', 'myqrcodetool_create_pages_on_activation');
+
+/**
+ * Ensure home page exists on theme init
+ */
+function myqrcodetool_ensure_home_page() {
+    $home_page_exists = get_posts(array(
+        'name'        => 'home',
+        'post_type'   => 'page',
+        'post_status' => array('publish', 'draft'),
+        'numberposts' => 1,
+    ));
+    
+    if (empty($home_page_exists)) {
+        $home_page_id = wp_insert_post(array(
+            'post_title'   => 'QR Code Generator - Free, Custom Logo & Many More',
+            'post_name'    => 'home',
+            'post_status'  => 'publish',
+            'post_type'    => 'page',
+            'post_content' => '',
+        ));
+        
+        if ($home_page_id && !is_wp_error($home_page_id)) {
+            update_post_meta($home_page_id, '_wp_page_template', 'front-page.php');
+            update_post_meta($home_page_id, '_myqrcodetool_meta_description', 'Free QR Code Generator for URLs, WiFi, Contacts, Events, Payments, and more. Create professional QR codes instantly with custom logos and designs.');
+            update_post_meta($home_page_id, '_myqrcodetool_meta_keywords', 'free qr code generator, qr code maker, custom qr code, qr code with logo');
+        }
+    }
+    
+    $static_page = get_option('page_on_front');
+    if (!$static_page) {
+        $home_page = get_posts(array(
+            'name'        => 'home',
+            'post_type'   => 'page',
+            'numberposts' => 1,
+        ));
+        
+        if (!empty($home_page)) {
+            update_option('show_on_front', 'page');
+            update_option('page_on_front', $home_page[0]->ID);
+            flush_rewrite_rules();
+        }
+    }
+}
+add_action('init', 'myqrcodetool_ensure_home_page', 1);
 
 /**
  * Output page-specific SEO meta tags (only for pages with custom meta)
