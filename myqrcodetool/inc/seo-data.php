@@ -17,11 +17,6 @@ if (!defined('ABSPATH')) {
  */
 function myqrcodetool_get_all_qr_pages() {
     return array(
-        'home' => array(
-            'title' => 'QR Code Generator - Free, Custom Logo & Many More',
-            'description' => 'Create custom QR codes for business, events, marketing. Free QR code generator with logo, colors, and download in PNG/SVG format.',
-            'keywords' => 'qr code generator, free qr code, qr code maker, create qr code, qr code with logo'
-        ),
         'url-to-qr' => array(
             'title' => 'Create QR Code for Any URL - Instant & Free',
             'description' => 'Convert any URL or link into a scannable QR code instantly. Just paste your link and share QR codes easily for websites, social media, promotions, and more.',

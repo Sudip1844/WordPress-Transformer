@@ -55,7 +55,6 @@ function myqrcodetool_create_pages_on_activation() {
     
     // Map pages to their templates
     $page_templates = array(
-        'home' => 'page-templates/template-qr-generator.php',
         'url-to-qr' => 'page-templates/template-qr-generator.php',
         'text-to-qr' => 'page-templates/template-qr-generator.php',
         'wifi-to-qr' => 'page-templates/template-qr-generator.php',
@@ -117,6 +116,40 @@ function myqrcodetool_create_pages_on_activation() {
 
 // Hook for theme activation
 add_action('after_switch_theme', 'myqrcodetool_create_pages_on_activation');
+
+/**
+ * Create and set Homepage on theme activation
+ */
+function myqrcodetool_setup_homepage() {
+    // Check if homepage already exists
+    $homepage = get_page_by_path('');
+    
+    if (!$homepage) {
+        // Create homepage
+        $home_page = array(
+            'post_title'    => 'QR Code Generator - Free, Custom Logo & Many More',
+            'post_name'     => 'qrcode-home',
+            'post_content'  => '',
+            'post_type'     => 'page',
+            'post_status'   => 'publish',
+            'comment_status' => 'closed',
+            'ping_status'   => 'closed',
+        );
+        
+        $home_page_id = wp_insert_post($home_page);
+        
+        if ($home_page_id && !is_wp_error($home_page_id)) {
+            // Set this page as the static front page
+            update_option('show_on_front', 'page');
+            update_option('page_on_front', $home_page_id);
+            
+            // Assign template
+            update_post_meta($home_page_id, '_wp_page_template', 'page-templates/template-qr-generator.php');
+        }
+    }
+}
+
+add_action('after_switch_theme', 'myqrcodetool_setup_homepage', 11);
 
 /**
  * Add admin menu to manually create pages
