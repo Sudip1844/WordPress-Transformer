@@ -42,18 +42,6 @@
         .container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
     </style>
     
-    <!-- Theme Toggle Script (runs early to prevent flash) -->
-    <script>
-        (function() {
-            var savedTheme = localStorage.getItem('theme');
-            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            var theme = savedTheme || (prefersDark ? 'dark' : 'light');
-            if (theme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        })();
-    </script>
-    
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>

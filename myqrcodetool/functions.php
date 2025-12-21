@@ -213,13 +213,6 @@ function myqrcodetool_scripts() {
         MYQRCODETOOL_VERSION
     );
     
-    wp_enqueue_style(
-        'myqrcodetool-button-sync',
-        MYQRCODETOOL_URI . '/assets/css/button-sync.css',
-        array(),
-        MYQRCODETOOL_VERSION
-    );
-    
     wp_enqueue_script(
         'myqrcodetool-vendor',
         MYQRCODETOOL_URI . '/assets/js/vendor-CMjGaeKf.js',
@@ -240,14 +233,6 @@ function myqrcodetool_scripts() {
         'myqrcodetool-index',
         MYQRCODETOOL_URI . '/assets/js/index-B65U0c70.js',
         array('myqrcodetool-vendor', 'myqrcodetool-header'),
-        MYQRCODETOOL_VERSION,
-        true
-    );
-    
-    wp_enqueue_script(
-        'myqrcodetool-header-button-sync',
-        MYQRCODETOOL_URI . '/assets/js/header-button-sync.js',
-        array('myqrcodetool-index'),
         MYQRCODETOOL_VERSION,
         true
     );
