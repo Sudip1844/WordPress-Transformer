@@ -77,10 +77,16 @@ function myqrcodetool_create_pages_on_activation() {
     
     // Create each page
     foreach ($page_templates as $slug => $template) {
-        // Check if page already exists
+        // Check if page already exists by slug
         $existing = get_page_by_path($slug);
+        
+        // Also check for common duplicates (e.g., privacy vs privacy-policy)
+        if (!$existing && $slug === 'privacy') {
+            $existing = get_page_by_path('privacy-policy');
+        }
+        
         if ($existing) {
-            continue;
+            continue; // Skip if page already exists
         }
         
         $page_title = '';
